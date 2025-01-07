@@ -102,9 +102,9 @@ void LDL_RenderSoftware::Fill(const LDL_Vec2i& pos, const LDL_Vec2i& size)
 	int sx  = _Screen->Size().x;
 	int bpp = _Screen->Bpp();
 
-	uint8_t* pixels      = _Screen->Pixels();
-	uint8_t   colorIndex = _BaseRender.ColorIndex();
-	LDL_Color colorRgb   = _BaseRender.Color();
+	uint8_t LDL_FAR* pixels = _Screen->Pixels();
+	uint8_t   colorIndex    = _BaseRender.ColorIndex();
+	LDL_Color colorRgb      = _BaseRender.Color();
 
 	if (bpp == 1)
 	{

@@ -28,12 +28,12 @@ DEALINGS IN THE SOFTWARE.
 #include <stdio.h>
 
 Engine::Engine(const LDL_Vec2i& size) :
-	_PaletteLoader(&_ByteReader, "data/COLOR.PAL"),
-	_Window(&_Result, LDL_Vec2i(0,0), size, "", LDL_WindowMode::Fixed),
-	_Render(&_Window, _PaletteLoader.Result()),
-	_FrmReader(&_ByteReader),
-	_SpriteLoader(&_FrmReader, _PaletteLoader.Result()),
-	_SpriteManager(&_SpriteLoader)
+	_paletteLoader(&_byteReader, "data/COLOR.PAL"),
+	_window(&_result, LDL_Vec2i(0,0), size, "", LDL_WindowMode::Fixed),
+	_render(&_window, _paletteLoader.Result()),
+	_frmReader(&_byteReader),
+	_spriteLoader(&_frmReader, _paletteLoader.Result()),
+	_spriteManager(&_spriteLoader)
 {
 }
 
@@ -43,43 +43,41 @@ Engine::~Engine()
 
 void Engine::Run()
 {
-	if (_Result.Ok())
+	if (_result.Ok())
 	{
 		LDL_Event report;
 
-		while (_Window.Running())
+		while (_window.Running())
 		{
-			_FpsCounter.Start();
+			_fpsCounter.Start();
 
-			while (_Window.GetEvent(report))
+			while (_window.GetEvent(report))
 			{
 				if (report.Type == LDL_Event::IsQuit)
 				{
-					_Window.StopEvent();
+					_window.StopEvent();
 				}
 			}
 
-			_Render.Begin();
-			
-			_Render.SetColor(7);
-			_Render.Clear();
+			_render.Begin();
 
-			Sprite* sprite = _SpriteManager.GetSprite("data/art/critters/HANPWRAA.FRM");
-			_Render.Draw(sprite->GetFrame(0, 0)->GetImage(), LDL_Vec2i(5, 10));
+			Sprite* sprite = _spriteManager.GetSprite("data/art/critters/HANPWRAA.FRM");
+			_render.Draw(sprite->GetFrame(0, 0)->GetImage(), LDL_Vec2i(5, 10));
+			_render.Draw(sprite->GetFrame(0, 0)->GetImage(), LDL_Vec2i(70, 10));
 
-			_Render.End();
+			_render.End();
 
-			if (_FpsCounter.Calc())
+			if (_fpsCounter.Calc())
 			{
-				_Window.Title(_Convert.Convert(_FpsCounter.Fps()));
-				_FpsCounter.Clear();
+				_window.Title(_convert.Convert(_fpsCounter.Fps()));
+				_fpsCounter.Clear();
 			}
 
-			_Window.PollEvents();
+			_window.PollEvents();
 		}
 	}
 	else
 	{
-		printf("%s\n", _Result.Message());
+		printf("%s\n", _result.Message());
 	}
 }

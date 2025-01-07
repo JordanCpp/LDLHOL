@@ -79,15 +79,17 @@ LDL_WindowOpenGL1::LDL_WindowOpenGL1(LDL_Result* result, const LDL_Vec2i& pos, c
 	_Visual = glXChooseVisual(_Window._Display, _Window._Screen, ga);
 
 	if (_Visual == NULL)
+	{
 		_Result->Message("glXChooseVisual failed");
+	}
 
 	XSetWindowAttributes wa;
 
-	wa.border_pixel = BlackPixel(_Window._Display, _Window._Screen);
-	wa.background_pixel = WhitePixel(_Window._Display, _Window._Screen);
+	wa.border_pixel      = BlackPixel(_Window._Display, _Window._Screen);
+	wa.background_pixel  = WhitePixel(_Window._Display, _Window._Screen);
 	wa.override_redirect = True;
-	wa.colormap = XCreateColormap(_Window._Display, _Window._Root, _Visual->visual, AllocNone);
-	wa.event_mask = ExposureMask;
+	wa.colormap          = XCreateColormap(_Window._Display, _Window._Root, _Visual->visual, AllocNone);
+	wa.event_mask        = ExposureMask;
 
 	size_t x = pos.x;
 	size_t y = pos.y;

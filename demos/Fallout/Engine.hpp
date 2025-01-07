@@ -37,16 +37,16 @@ public:
 	~Engine();
 	void Run();
 private:
-	LDL_ByteReader     _ByteReader;
-	PaletteLoader      _PaletteLoader;
-	LDL_Result         _Result;
-	LDL_Window         _Window;
-	LDL_Render         _Render;
-	LDL_FpsCounter     _FpsCounter;
-	LDL_Converter      _Convert;
-	FrmReader          _FrmReader;
-	SpriteLoader       _SpriteLoader;
-	SpriteManager      _SpriteManager;
+	LDL_ByteReader     _byteReader;
+	PaletteLoader      _paletteLoader;
+	LDL_Result         _result;
+	LDL_Window         _window;
+	LDL_Render         _render;
+	LDL_FpsCounter     _fpsCounter;
+	LDL_Converter      _convert;
+	FrmReader          _frmReader;
+	SpriteLoader       _spriteLoader;
+	SpriteManager      _spriteManager;
 };
 
 #endif
