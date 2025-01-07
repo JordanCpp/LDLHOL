@@ -49,7 +49,7 @@ LDL_Mat4f& LDL_Mat4f::operator=(const LDL_Mat4f& source)
 	if (this == &source)
 		return *this;
 
-	memcpy(&_values, source._values, sizeof(_values));
+	LDL_BytesCopy(&_values, source._values, sizeof(_values));
 
 	return *this;
 }

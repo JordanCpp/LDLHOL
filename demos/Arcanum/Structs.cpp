@@ -94,7 +94,7 @@ HashItem* HashTable::Contains(const char* name)
     {
         HashItem* item = (HashItem*)i;
 
-        if (strcmp(name, item->Key) == 0)
+        if (LDL_CharsEqual(name, item->Key) == 0)
         {
             return item;
         }
@@ -109,7 +109,7 @@ void HashTable::Add(HashItem* item, const char* name)
     {
         size_t h = HashLy(name) % _Length;
 
-        strcpy(item->Key, name);
+        LDL_CharsCopy(item->Key, name);
 
         _Table[h].PushBack(item);
     }
@@ -123,7 +123,7 @@ ListNode::ListNode() :
 
 HashItem::HashItem()
 {
-    memset(Key, 0, sizeof(Key));
+    LDL_BytesClear(Key, 0, sizeof(Key));
 }
 
 Vector::Vector(size_t capacity, size_t elementSize) :
@@ -166,7 +166,7 @@ void Vector::Set(size_t index, void* element)
     LDL_ASSERT(index <= _Capacity);
     LDL_ASSERT(element != NULL);
 
-    memcpy(&_Content + (index * _ElementSize), element, _ElementSize);
+    LDL_BytesCopy(&_Content + (index * _ElementSize), element, _ElementSize);
 }
 
 void Vector::PushBack(void* element)

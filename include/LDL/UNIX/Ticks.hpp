@@ -28,7 +28,8 @@ DEALINGS IN THE SOFTWARE.
 #define LDL_Windows_Ticks_hpp
 
 #include "../Config.hpp"
-#include <dos.h>
+#include <sys/time.h>
+#include <unistd.h>
 
 size_t LDL_Ticks();
 void LDL_Delay(size_t count);

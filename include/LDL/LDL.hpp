@@ -37,6 +37,12 @@ DEALINGS IN THE SOFTWARE.
     #include "Windows/Terminat.hpp"
     #include "Windows/Console.hpp"
     #include "Windows/FileStrm.hpp"
+#elif defined(__unix__)
+    #include <stdio.h>
+    #include <stdlib.h>
+    #include "UNIX/Terminat.hpp"
+    #include "UNIX/Console.hpp"
+    #include "UNIX/FileStrm.hpp"
 #elif defined(__MSDOS__)
     #include <stdio.h>
     #include <stdlib.h>
@@ -69,7 +75,6 @@ DEALINGS IN THE SOFTWARE.
     #include "Windows/MainWin.hpp"
     #include "Windows/Ticks.hpp"
     #include "Windows/Library.hpp"
-    
     #if defined(LDL_SUPPORT_OPENGL1)
         #include "OpenGL/Mat4f.hpp"
         #include "OpenGL/Funcs.hpp"
@@ -102,8 +107,20 @@ DEALINGS IN THE SOFTWARE.
         typedef LDL_RenderSoftware  LDL_Render;
     #endif
 #elif defined(__unix__)
+    #include "UNIX/MainWin.hpp"
     #include "UNIX/Ticks.hpp"
     #include "UNIX/Library.hpp"
+    #include "OpenGL/Mat4f.hpp"
+    #include "OpenGL/Funcs.hpp"
+    #include "OpenGL/GLFuncs.hpp"
+    #include "OpenGL/OpenGL.hpp"
+    #include "OpenGL/UtilGL.hpp"
+    #include "UNIX/GL1Win.hpp"
+    typedef LDL_WindowOpenGL1  LDL_Window;
+    #include "Renders/GL1Tex.hpp"
+    typedef LDL_TextureOpenGL1 LDL_Texture;
+    #include "Renders/GL1Rndr.hpp"
+    typedef LDL_RenderOpenGL1  LDL_Render;
 #elif defined(__MSDOS__)
     #include "DOS/Ticks.hpp"
     #include "DOS/MainWin.hpp"

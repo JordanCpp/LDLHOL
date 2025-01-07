@@ -40,7 +40,7 @@ LDL_Texture* ImageManager::GetImage(const char* name)
 
 PathManager::PathManager(const char* path)
 {
-	LDL_ASSERT(strlen(path) < PathManager::ShortMax);
+	LDL_ASSERT(LDL_CharsLength(path) < PathManager::ShortMax);
 
 	LDL_BytesClear(_ShortPath, 0, sizeof(_ShortPath));
 	LDL_BytesClear(_FullPath, 0, sizeof(_FullPath));

@@ -38,7 +38,7 @@ LDL_Texture* SpriteFrame::GetImage()
 
 Sprite::Sprite()
 {
-	memset(&_Frames, 0, sizeof(_Frames));
+	LDL_BytesClear(&_Frames, 0, sizeof(_Frames));
 }
 
 void Sprite::Append(size_t dir, SpriteFrame* frame)

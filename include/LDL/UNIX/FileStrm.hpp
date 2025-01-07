@@ -24,43 +24,56 @@ ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 DEALINGS IN THE SOFTWARE.
 */
 
-#ifndef LDL_UNIX_GL1Funcs_hpp
-#define LDL_UNIX_GL1Funcs_hpp
+#ifndef LDL_DOS_FileStrm_hpp
+#define LDL_DOS_FileStrm_hpp
 
-#include "GLX.hpp"
-#include "Library.hpp"
-
-class LDL_OpenGLFunctions
+class LDL_FileStream
 {
 public:
-	LDL_OpenGLFunctions();
-	~LDL_OpenGLFunctions();
-	LDL_VoidFuncPtr Function(const char* name);
+	enum
+	{
+		ModeOpen = 1
+	};
+
+	LDL_FileStream();
+	~LDL_FileStream();
+	bool Open(const char* path, size_t mode);
+	void Close();
+	size_t Read(void* dest, size_t bytes);
 private:
-	LDL_Library _Library;
+	FILE* _file;
 };
 
 #ifdef LDL_IMPLEMENTATION
-LDL_OpenGLFunctions::LDL_OpenGLFunctions()
+LDL_FileStream::LDL_FileStream() :
+	_file(NULL)
 {
 }
 
-LDL_OpenGLFunctions::~LDL_OpenGLFunctions()
+LDL_FileStream::~LDL_FileStream()
 {
+	void Close();
 }
 
-LDL_VoidFuncPtr LDL_OpenGLFunctions::Function(const char* name)
+bool LDL_FileStream::Open(const char* path, size_t mode)
 {
-	LDL_VoidFuncPtr result = (LDL_VoidFuncPtr)glXGetProcAddress((const GLubyte*)name);
+	_file = fopen(path, "rb");
 
-	if (result == NULL)
+	return (_file != NULL);
+}
+
+void LDL_FileStream::Close()
+{
+	if (_file != NULL)
 	{
-		//LDL_Abort("Not found function:", name);
+		fclose(_file);
 	}
-
-	return result;
 }
 
+size_t LDL_FileStream::Read(void* dest, size_t bytes)
+{
+	return fread(dest, bytes, 1, _file);
+}
 #endif
 
 #endif

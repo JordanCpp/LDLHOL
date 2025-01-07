@@ -27,8 +27,7 @@ DEALINGS IN THE SOFTWARE.
 #ifndef LDL_UNIX_GL1Win_hpp
 #define LDL_UNIX_GL1Win_hpp
 
-#include <LDL/MainWin.hpp>
-#include <LDL/UNIX/GLX.hpp>
+#include "GLX.hpp"
 
 class LDL_WindowOpenGL1
 {
@@ -49,7 +48,7 @@ public:
 	void* NativeHandle();
 	void Update();
 private:
-	LDL_Result*    _result;
+	LDL_Result*    _Result;
 	LDL_MainWindow _Window;
 	XVisualInfo*   _Visual;
 	GLXContext     _Context;
@@ -115,8 +114,8 @@ LDL_WindowOpenGL1::~LDL_WindowOpenGL1()
 
 void LDL_WindowOpenGL1::Present(uint8_t* pixels, uint8_t bytesPerPixel)
 {
-	assert(pixels != NULL);
-	assert(bytesPerPixel == 1 || bytesPerPixel == 2 || bytesPerPixel == 3 || bytesPerPixel == 4);
+	LDL_ASSERT(pixels != NULL);
+	LDL_ASSERT(bytesPerPixel == 1 || bytesPerPixel == 2 || bytesPerPixel == 3 || bytesPerPixel == 4);
 }
 
 void LDL_WindowOpenGL1::Present()

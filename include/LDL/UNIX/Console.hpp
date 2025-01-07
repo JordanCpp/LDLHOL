@@ -24,43 +24,25 @@ ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 DEALINGS IN THE SOFTWARE.
 */
 
-#ifndef LDL_UNIX_GL1Funcs_hpp
-#define LDL_UNIX_GL1Funcs_hpp
+#ifndef LDL_Windows_Console_hpp
+#define LDL_Windows_Console_hpp
 
-#include "GLX.hpp"
-#include "Library.hpp"
-
-class LDL_OpenGLFunctions
+class LDL_Console
 {
 public:
-	LDL_OpenGLFunctions();
-	~LDL_OpenGLFunctions();
-	LDL_VoidFuncPtr Function(const char* name);
+	LDL_Console();
+	size_t Write(const char* data, size_t count);
 private:
-	LDL_Library _Library;
 };
 
 #ifdef LDL_IMPLEMENTATION
-LDL_OpenGLFunctions::LDL_OpenGLFunctions()
+LDL_Console::LDL_Console()
 {
 }
-
-LDL_OpenGLFunctions::~LDL_OpenGLFunctions()
+size_t LDL_Console::Write(const char* data, size_t count)
 {
+	return 0;
 }
-
-LDL_VoidFuncPtr LDL_OpenGLFunctions::Function(const char* name)
-{
-	LDL_VoidFuncPtr result = (LDL_VoidFuncPtr)glXGetProcAddress((const GLubyte*)name);
-
-	if (result == NULL)
-	{
-		//LDL_Abort("Not found function:", name);
-	}
-
-	return result;
-}
-
 #endif
 
 #endif

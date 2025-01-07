@@ -27,10 +27,6 @@ DEALINGS IN THE SOFTWARE.
 #ifndef LDL_UNIX_MainWin_hpp
 #define LDL_UNIX_MainWin_hpp
 
-#include <LDL/BaseWin.hpp>
-#include <LDL/Result.hpp>
-#include <LDL/Events.hpp>
-
 #include <X11/Xlib.h>
 #include <X11/Xutil.h>
 #include <X11/keysym.h>
@@ -52,9 +48,9 @@ public:
 	const LDL_Vec2i& Size();
 	const LDL_Vec2i& Pos();
 private:
-	LDL_Result*    _result;
-	LDL_BaseWindow _baseWindow;
-	LDL_Eventer    _eventer;
+	LDL_Result*    _Result;
+	LDL_BaseWindow _BaseWindow;
+	LDL_Eventer    _Eventer;
 public:
 	Display* _Display;
 	int      _Screen;
